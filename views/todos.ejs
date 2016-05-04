@@ -1,0 +1,15 @@
+<html>
+    <head>
+        <link href="/assets/style.css" type="text/css" rel="stylesheet" />
+    </head>
+    <body>
+        <h1>Todos from: <%= ID %></h1>
+        <ul>
+            <% for(var i=0; i<TODOS.length; i++) { %>
+                <li>
+                    <%= TODOS[i].todo %>
+                </li>
+            <% } %>
+        </ul>
+    </body>
+</html>
