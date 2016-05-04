@@ -1,15 +1,33 @@
 <html>
     <head>
         <link href="/assets/style.css" type="text/css" rel="stylesheet" />
+        <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
     </head>
     <body>
         <h1>Todos from: <%= ID %></h1>
         <ul>
             <% for(var i=0; i<TODOS.length; i++) { %>
                 <li>
-                    <%= TODOS[i].todo %>
+                    <%= TODOS[i].todo %>  
+                    <button id="button" onclick="deleteTodo('<%= TODOS[i]._id %>')">Delete</button>
                 </li>
             <% } %>
         </ul>
+        <form method="POST" action="/api/todo">
+		    Todo: <input type="text" id="todo" name="todo" /><br />
+		    <input type="submit" value="Submit" />
+	    </form>
+        <script>
+            function deleteTodo(id) {
+                $.ajax({
+                    type: "DELETE",
+                    url: "/api/todo/",
+                    data:{
+                        id:`${id}`
+                    },
+                    success : function(){location.reload();}
+                });
+               }
+        </script>
     </body>
 </html>

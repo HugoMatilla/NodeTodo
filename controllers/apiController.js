@@ -33,7 +33,8 @@ module.exports = function(app) {
              function(err, todo) {
                 if (err) throw err;
                 
-                res.send(`Success\n Todo updated to:\n ${todo}`);
+                console.log(`Todo updated to:\n ${todo}`);
+                res.redirect(`/todos/${todo.uname}`);
             });
         }
         
@@ -47,7 +48,8 @@ module.exports = function(app) {
            });
            newTodo.save(function(err, todo) {
                if (err) throw err;
-               res.send(`Success\n Todo added:\n ${todo}`);
+               console.log(`Todo added to:\n ${todo}`);
+               res.redirect(`/todos/${newTodo.username}`);
            });
             
         }
@@ -58,7 +60,11 @@ module.exports = function(app) {
         
         Todos.findByIdAndRemove(req.body.id, function(err) {
             if (err) throw err;
-            res.send('Success');
+            
+            res.send({
+                retStatus : 200,
+                redirectTo: '/todos/test',
+                });
         })
         
     });
